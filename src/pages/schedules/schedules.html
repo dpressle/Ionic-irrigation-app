@@ -1,0 +1,54 @@
+ <!--
+  Generated template for the Schedules page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-toolbar color="primary">
+    <!--<ion-buttons start>
+      <button ion-button icon-only color="royal">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>-->
+    <ion-title>Schedules</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+   <ion-refresher (ionRefresh)="refreshAll($event)">               
+    <ion-refresher-content 
+      pullingIcon="arrow-down">
+    </ion-refresher-content>
+  </ion-refresher>
+  
+  <ion-fab bottom left >
+    <button ion-fab  color="primary" (click)="newSchedule()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-list>
+    <ion-item-sliding *ngFor="let schedule of schedules">
+      <!--<ion-item>-->
+      <button ion-item  (click)="itemTapped(schedule.id)">
+        <h2>{{schedule.name}}</h2>
+        <ion-note>{{schedule.e == 'on' ? "Enabled" : "Disabled"}}</ion-note>
+      </button>
+      <!--</ion-item>-->
+      <ion-item-options>
+        <!--<button ion-button color="danger" (click)="itemDelete($event, schedule.id)" >
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>-->
+        <button ion-button color="primary" (click)="itemRun(schedule.id)" >
+          <ion-icon name="timer"></ion-icon>
+          Run Now
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,87 @@
+<!--
+  Generated template for the Logs page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary" >
+    <ion-title>Logs</ion-title>
+  </ion-navbar>
+
+  <!--<ion-toolbar>
+    <ion-searchbar placeholder="Search" 
+                   [(ngModel)]="queryText" 
+                   (ionInput)="onInput($event)"
+                   (ionCancel)="onCancel($event)"> >
+    </ion-searchbar>
+  </ion-toolbar>-->
+</ion-header>
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)" >              
+    <ion-refresher-content pullingIcon="arrow-down" >
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-searchbar [(ngModel)]="queryText" (ionInput)="getLogs($event)"></ion-searchbar>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>From Date:</ion-label>
+        <ion-datetime displayFormat="D/M/YYYY" pickerFormat="D/M/YYYY" [(ngModel)]="startTime" (ionChange)="onStartChange()"></ion-datetime>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+ 
+  <ion-list>
+    <ion-item-group *ngFor="let log of logs">
+      <ion-item-divider color="primary">{{zones[log.zone - 1].name}}</ion-item-divider>
+        <ion-item *ngFor="let item of log.entries">
+          <!--<ion-row>
+            <ion-col>
+              <h2></h2>
+            </ion-col>
+          </ion-row>-->
+          <ion-row>
+            <ion-col width-60>
+              <h4>Date</h4>
+            </ion-col>
+            <ion-col >
+              <h4>Run time</h4>
+            </ion-col>
+            <ion-col >
+              <h4>Sched</h4>
+            </ion-col>
+            <ion-col >
+              <h4>SAdj</h4>
+            </ion-col>
+            <ion-col >
+              <h4>WAdj</h4>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col width-40>
+              <p>{{item.date*1000 | itime}}</p>
+              <p>{{item.date*1000 | idate}}</p>
+            </ion-col>
+            <ion-col>
+              <h5>{{item.duration/60 | floor}}:{{(item.duration%60) < 10 ? ('0'+item.duration%60) : item.duration%60 }}</h5>
+            </ion-col>
+            <ion-col> 
+                <h5>{{item.schedule === -1 ? 'M' : (item.schedule === 100 ? 'Q' : item.schedule)}}</h5>
+            </ion-col>
+            <ion-col>
+              <h5>{{item.seasonal === -1 ? '-' : item.seasonal}}</h5>
+            </ion-col>
+            <ion-col>
+              <h5>{{item.wunderground === -1 ? '-' : item.wunderground}}</h5>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+    </ion-item-group>
+  </ion-list>
+</ion-content>

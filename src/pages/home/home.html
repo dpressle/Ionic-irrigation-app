@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Sprinklers App</ion-title>
+  </ion-navbar>
+  <ion-toolbar >
+    <!--<ion-label fixed>Scheduling</ion-label>
+    <ion-toggle color="secondary" [(ngModel)]="scheduling" (ionChange)="toggleScheduling()"></ion-toggle>-->
+    <ion-card>
+    <ion-card-header>
+      Scheduling
+    </ion-card-header>
+    <ion-card-content>
+      <ion-toggle color="secondary" [(ngModel)]="scheduling" (ionChange)="toggleScheduling()"></ion-toggle>
+    </ion-card-content>
+  </ion-card>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+   <ion-refresher (ionRefresh)="refreshAll($event)">               
+    <ion-refresher-content 
+      pullingIcon="arrow-down" >
+    </ion-refresher-content>                    
+  </ion-refresher>
+  <!--<ion-refresher (ionRefresh)="refreshAll($event)" >
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>-->
+
+  
+  <ion-card *ngIf="zoneState.onzone != null">
+    <!--<ion-item>-->
+    <ion-card-header>
+      Now Running
+    </ion-card-header>
+    <ion-card-content>
+      <!--<ion-item>-->
+      <!--<ion-label>Now Running</ion-label>-->
+      <!--<span item-left>Now Running</span>-->
+      <ion-item>
+      <h2 item-left>{{zoneState.onzone}}</h2>
+      </ion-item>
+      <!--</ion-item>-->
+      <!--<ion-item>-->
+      <!--<span item-left>{{zoneState.onzone}}</span>-->
+      <!--<span item-left>{{runningTime}}</span>-->
+      <ion-item>
+        <!--<span item-left>{{runningTime}}</span>-->
+        <ion-chip item-left color="primary">
+          <ion-label>{{runningTime | SecondsToTime | date:'HH:mm:ss'}}</ion-label>
+        </ion-chip>
+        <button ion-button item-right color="danger" outline medium (click)="stopZone()">
+          Stop
+        </button>
+      </ion-item>
+      <!--</ion-item>-->
+
+    </ion-card-content>
+    <!--</ion-item>-->
+  </ion-card>
+
+  <ion-list >
+    <div *ngFor="let zone of zones; let i = index">
+      <ion-item *ngIf="zone.enabled == 'on'">
+          <ion-icon name="water" item-left></ion-icon>
+          <!--<ion-thumbnail item-left>
+      <img src="img/thumbnail-totoro.png">
+    </ion-thumbnail>-->
+          <h2>Zone {{i+1}}</h2>
+          <ion-note color="primary">{{zone.name}}</ion-note>
+          <!--<p>state: {{zone.state}}</p>-->
+          <!--<p><ion-badge *ngIf="runningZone === zone.name" item-left color="secondary">{{runningTime}}</ion-badge></p>-->
+          <!--<ion-label *ngIf="runningZone === zone.name">time left: {{runningTime}}</ion-label>-->
+        <!--</ion-label>-->
+        <!--<ion-toggle color="secondary" checked="{{zone.state === 'on'}}"  (ionChange)="runZone(i)"></ion-toggle>  -->
+        <button ion-button item-right color="secondary" outline medium (click)="runZone(i)">
+          <!--Run-->
+          <!--<ion-icon name="play"></ion-icon>-->
+          Run
+        </button>
+      </ion-item>
+    </div>
+  </ion-list>
+</ion-content>
