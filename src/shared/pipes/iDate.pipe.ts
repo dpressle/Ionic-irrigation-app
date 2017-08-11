@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class IDatePipe implements PipeTransform {
   transform(value: number): string {
     let dt = new Date(value);
-    return  this.pad(dt.getUTCDate(),2) + '/' + this.pad(dt.getUTCMonth()+1,2) + '/' + this.pad(dt.getUTCFullYear(),2);
+    return  this.pad(dt.getUTCDate(),2) + '/' + this.pad(dt.getUTCMonth()+1,2);
   }
 
   pad(n, width, z?) {
