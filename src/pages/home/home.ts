@@ -5,7 +5,8 @@ import {
   LoadingController,
   ToastController,
   Events,
-  ModalController
+  ModalController,
+  AlertController
 } from 'ionic-angular';
 import { LocalNotifications } from 'ionic-native';
 // import { Storage } from '@ionic/storage';
@@ -37,7 +38,8 @@ export class HomePage {
     private loadingCtrl: LoadingController,
     private events: Events,
     private modalCtrl: ModalController,
-    private configService: ConfigService) {
+    private configService: ConfigService,
+    private alertCtrl: AlertController) {
       events.subscribe('zones:save', () => {
         this.getZones();
       });
@@ -100,7 +102,13 @@ export class HomePage {
       },
       (error) => {
         console.error(error);
-        this.editUrl();
+        let alert = this.alertCtrl.create({
+          title: 'Failed getting zones!',
+          subTitle: error,
+          buttons: ['OK']
+        });
+        alert.present();
+//        this.editUrl();
       },
       () => console.log('zones retrieval completed')
     );
