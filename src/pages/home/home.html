@@ -2,18 +2,25 @@
   <ion-navbar color="primary">
     <ion-title>Sprinklers App</ion-title>
   </ion-navbar>
-  <ion-toolbar >
-    <!--<ion-label fixed>Scheduling</ion-label>
-    <ion-toggle color="secondary" [(ngModel)]="scheduling" (ionChange)="toggleScheduling()"></ion-toggle>-->
-    <ion-card>
-    <ion-card-header>
-      Scheduling
-    </ion-card-header>
-    <ion-card-content>
-      <ion-toggle color="secondary" [(ngModel)]="scheduling" (ionChange)="toggleScheduling()"></ion-toggle>
-    </ion-card-content>
-  </ion-card>
-  </ion-toolbar>
+  <!-- <ion-toolbar > -->
+    <!-- <ion-list no-border> -->
+      <!-- <ion-item> -->
+        <!-- <ion-toggle item-end color="secondary" [(ngModel)]="scheduling" (ionChange)="toggleScheduling()"></ion-toggle>
+        <ion-label>
+          Scheduling State
+        </ion-label> -->
+        <!-- <ion-icon name='clock' item-start></ion-icon> -->
+      <!-- </ion-item> -->
+    <!-- </ion-list> -->
+    <!-- <ion-card>
+      <ion-card-header>
+        Scheduling
+      </ion-card-header>
+      <ion-card-content>
+        <ion-toggle color="secondary" [(ngModel)]="scheduling" (ionChange)="toggleScheduling()"></ion-toggle>
+      </ion-card-content>
+    </ion-card> -->
+  <!-- </ion-toolbar> -->
 </ion-header>
 
 <ion-content>
@@ -26,8 +33,14 @@
     <ion-refresher-content>
     </ion-refresher-content>
   </ion-refresher>-->
-
-  
+  <ion-list>
+<ion-item>
+    <ion-toggle color="secondary" [(ngModel)]="scheduling" (ionChange)="toggleScheduling()"></ion-toggle>
+    <ion-label> Scheduling State
+    </ion-label>
+    <!-- <ion-icon name='clock' item-start></ion-icon> -->
+  </ion-item>
+</ion-list>
   <ion-card *ngIf="zoneState.onzone != null">
     <!--<ion-item>-->
     <ion-card-header>
