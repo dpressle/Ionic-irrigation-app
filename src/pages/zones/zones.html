@@ -8,13 +8,13 @@
 
   <ion-toolbar color="primary">
     <ion-title>Edit Zones</ion-title>
-    <!--<ion-buttons end>
+    <ion-buttons end>
       <button ion-button icon-only (click)="saveZones()">
         <ion-icon name="checkmark"></ion-icon>
       </button>
-    </ion-buttons>-->
+    </ion-buttons>
   </ion-toolbar>
-
+ 
 </ion-header>
 
 
@@ -25,15 +25,15 @@
     </ion-refresher-content>
   </ion-refresher>
   
-  <ion-fab bottom right >
+  <!-- <ion-fab bottom right >
     <button ion-fab  color="primary" (click)="saveZones()">
       <ion-icon name="checkmark"></ion-icon>
     </button>
-  </ion-fab>
+  </ion-fab> -->
 
   <ion-list *ngFor="let zone of zones; let i = index">
-    <ion-list-header >
-      <h2>Zone {{i+1}}</h2>
+    <ion-list-header>
+      <ion-note>Zone {{i+1}}</ion-note>
     </ion-list-header>
     <ion-item>
       <ion-label fixed>Name</ion-label>

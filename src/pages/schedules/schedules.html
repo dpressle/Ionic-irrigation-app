@@ -7,11 +7,11 @@
 <ion-header>
 
   <ion-toolbar color="primary">
-    <!--<ion-buttons start>
+    <ion-buttons start>
       <button ion-button icon-only color="royal">
-        <ion-icon name="search"></ion-icon>
+        <ion-icon name="add"></ion-icon>
       </button>
-    </ion-buttons>-->
+    </ion-buttons>
     <ion-title>Schedules</ion-title>
   </ion-toolbar>
 
@@ -25,11 +25,11 @@
     </ion-refresher-content>
   </ion-refresher>
   
-  <ion-fab bottom left >
+  <!-- <ion-fab bottom left >
     <button ion-fab  color="primary" (click)="newSchedule()">
       <ion-icon name="add"></ion-icon>
     </button>
-  </ion-fab>
+  </ion-fab> -->
   <ion-list>
     <ion-item-sliding *ngFor="let schedule of schedules">
       <!--<ion-item>-->
