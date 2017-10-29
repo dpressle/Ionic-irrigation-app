@@ -7,12 +7,17 @@
 <ion-header>
 
   <ion-toolbar color="primary">
-    <ion-buttons end>
+    <!-- <ion-buttons end>
         <button ion-fab  color="primary" (click)="newSchedule()">
         <ion-icon name="add"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons> -->
     <ion-title>Schedules</ion-title>
+    <ion-buttons end>
+    <button ion-button icon-only (click)="newSchedule()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-toolbar>
 
 </ion-header>
