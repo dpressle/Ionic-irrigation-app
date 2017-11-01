@@ -4,7 +4,8 @@ import { NavController,
          LoadingController, 
          AlertController, 
          ToastController,
-         Events } from 'ionic-angular';
+         Events,
+         ModalController } from 'ionic-angular';
 
 import { ScheduleDetailsPage } from '../pages';
 import { SprinklersApiService } from '../../shared/shared';
@@ -25,6 +26,7 @@ export class SchedulesPage {
     private alertCtrl: AlertController,
     private toastCtlr: ToastController,
     public events: Events,
+    private modalCtrl: ModalController,
     // private configService: ConfigService
     ) {
     events.subscribe('schedule:saved', (id) => {

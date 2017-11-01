@@ -10,7 +10,7 @@ import {
 } from 'ionic-angular';
 import { LocalNotifications } from 'ionic-native';
 // import { Storage } from '@ionic/storage';
-
+import { QuickSchedulePage } from '../pages';
 import { SprinklersApiService, ConfigService, ConfigPage } from '../../shared/shared';
 import { State } from '../../shared/models';
 
@@ -24,9 +24,9 @@ export class HomePage {
   scheduling: boolean = false;
   //newScheduling: boolean = false;
   //runningZone: string = "";
-  runningTime: number;
-  intervalId: number;
-  timout: number;
+  runningTime: string;
+  // intervalId: number;
+  timeout: number;
   // configService: ConfigService;
   // url: string;
   //storage = new Storage();
@@ -55,6 +55,11 @@ export class HomePage {
     this.getZones(); 
   }
 
+  ionViewWillEnter () {
+    if (this.zoneState.offtime == null) {
+      this.checkState();
+    }
+  }
   // loadConfig(){
   //   // this.configService.getUrl().then(
   //   //   (value) => {
@@ -97,7 +102,7 @@ export class HomePage {
     this.api.getZones().subscribe(
       (data) => {
         this.zones = data;
-        this.checkState();
+        //this.checkState();
         // this.intervalId = setInterval(() => this.checkState(), 1000);
       },
       (error) => {
@@ -107,8 +112,8 @@ export class HomePage {
           subTitle: error,
           buttons: ['OK']
         });
-        alert.present();
-//        this.editUrl();
+        // alert.present();
+        this.editUrl();
       },
       () => console.log('zones retrieval completed')
     );
@@ -117,29 +122,48 @@ export class HomePage {
   checkState() {
     this.api.getState().subscribe(
       (state) => {
+        this.scheduling = state.run === 'on';
         this.zoneState = state;
         if (this.zoneState.offtime != null) {
-          if (this.zoneState.offtime == 99999) {
-            this.runningTime = 0;
+          console.log(this.zoneState.offtime);
+          this.timeout = (new Date().getTime()) + (1000 * state.offtime);
+          
+          if (state.offtime == 99999) {
+            this.runningTime = '- - : - -';
           } else {
-            if (this.zoneState.offtime >= 0) {
-              this.runningTime = this.zoneState.offtime;
-            }
+            this.updateState();
+            //setInterval(() => this.updateState(), 1);
+            //setTimeout(() => this.updateState(), 1);
           }
         } else {
-          this.scheduling = this.zoneState.run === 'on';
+          this.timeout = 0;
         }
       }, 
       (error) => {
         console.log(error);
-        //clearInterval(this.intervalId);
         this.editUrl();
       },
       () => {
         console.log('state retrieval completed');
-        setTimeout(() => this.checkState(), 1000);
+        //setTimeout(() => this.checkState(), 1000);
       }
     );
+  }
+
+  updateState() {
+    // console.log('timeout: '+this.timeout);
+    // console.log('round: '+Math.round(new Date().getTime() / 1000));
+    // console.log('before floor: '+(this.timeout - Math.round((new Date().getTime()) / 1000)));
+    let remaining = this.timeout - (new Date().getTime());
+    //console.log('remaining: '+remaining);
+    remaining = Math.round(remaining / 1000);
+    console.log('remaining: '+remaining);
+    if (remaining >= 0) {
+      this.runningTime = Math.round(remaining / 60).toString() + ":" + ("00" + (remaining % 60  ).toString()).substr(-2);
+      setTimeout(() => this.updateState(), 1000);
+    } else {
+      this.checkState();
+    }
   }
 
   scheduleNotification() {
@@ -187,6 +211,9 @@ export class HomePage {
       error => {
         console.error(error);
         // TODO: show error to user
+      },
+      () => {
+        this.checkState();
       }
     );
   }
@@ -213,6 +240,9 @@ export class HomePage {
       error => {
         console.error(error);
         // TODO: show eeror to user
+      },
+      () => {
+        this.checkState();
       }
     );
   }
@@ -228,5 +258,10 @@ export class HomePage {
          
     //   }
     // );
+  }
+
+  quickSchedule() {
+    this.navCtrl.push(QuickSchedulePage);
+    this.checkState();
   }
 }

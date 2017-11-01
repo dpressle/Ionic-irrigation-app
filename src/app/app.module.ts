@@ -2,7 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { MyApp } from './app.component';
-import { TabsPage, HomePage, ZonesPage, SchedulesPage, ScheduleDetailsPage, LogsPage, SettingsPage, Wether} from '../pages/pages';
+import { TabsPage, HomePage, ZonesPage, SchedulesPage, ScheduleDetailsPage, LogsPage, SettingsPage, Wether, QuickSchedulePage } from '../pages/pages';
 
 import { ConfigService, ConfigPage, SprinklersApiService, FloorPipe, ItimePipe, IDatePipe, SecondsToTimePipe } from '../shared/shared';
 
@@ -10,6 +10,7 @@ import { ConfigService, ConfigPage, SprinklersApiService, FloorPipe, ItimePipe, 
   declarations: [
     MyApp,
     HomePage,
+    QuickSchedulePage,
     TabsPage,
     ZonesPage,
     SchedulesPage,
@@ -30,6 +31,7 @@ import { ConfigService, ConfigPage, SprinklersApiService, FloorPipe, ItimePipe, 
   entryComponents: [
     MyApp,
     HomePage,
+    QuickSchedulePage,
     TabsPage,
     ZonesPage,
     SchedulesPage,
