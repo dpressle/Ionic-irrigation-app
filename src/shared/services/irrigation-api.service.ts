@@ -150,19 +150,19 @@ export class SprinklersApiService {
         //.finally(() => this.loader.dismiss());
     }
 
-    runSchedule(schedulesDuration: string): Observable<any> {
+    runSchedule(schedulesId: number): Observable<any> {
         //this.loader.present();
-        return this.http.get(`${this.baseUrl}/bin/setQSched?sched=-1&${schedulesDuration}`)
+        return this.http.get(`${this.baseUrl}/bin/setQSched?sched=${schedulesId}`)
             // .map((res: Response) => res.status)
             // .do(data => console.log(data))
             .catch(this.handleError);
         //.finally(() => this.loader.dismiss());
     }
 
-    // setQSched(zonesDuration: String): Observable<any> {
-    //     return this.http.get(`${this.baseUrl}/bin/setQSched?sched=-1&${zonesDuration}`)
-    //     .catch(this.handleError);
-    // }
+    runQuickSchedule(zonesDuration: String): Observable<any> {
+        return this.http.get(`${this.baseUrl}/bin/setQSched?sched=-1&${zonesDuration}`)
+        .catch(this.handleError);
+    }
 
     getLogs(startDate: number, endDate: number): Observable<Logs[]> {
         let loader = this.loaderCtrl.create({

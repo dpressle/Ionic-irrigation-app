@@ -35,7 +35,8 @@
       <!--<ion-item>-->
       <button ion-item  (click)="itemTapped(schedule.id)">
         <h2>{{schedule.name}}</h2>
-        <ion-note>{{schedule.e == 'on' ? "Enabled" : "Disabled"}}</ion-note>
+        <p *ngIf="schedule.e == 'on'" >enabled</p>
+        <p *ngIf="schedule.e == 'off'" color="danger">disabled</p>
       </button>
       <!--</ion-item>-->
       <ion-item-options>

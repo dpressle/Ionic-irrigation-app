@@ -70,14 +70,15 @@ export class QuickSchedulePage {
           }
         }
        // console.log(saveString);
-        this.api.runSchedule(saveString).subscribe(
+        this.api.runQuickSchedule(saveString).subscribe(
             error => {
                 console.log(error);
+                // TODO notify user of erro
             },
             () => {
                 console.log('schedules started');
             });
-        this.navCtrl.pop();
+            this.navCtrl.pop();
     }
 
     cancel() {

@@ -41,24 +41,22 @@
       <ion-checkbox [(ngModel)]="type" color="primary"></ion-checkbox>
     </ion-item>
     <ion-item *ngIf="type">
-      <!--<ion-card-header>Days</ion-card-header>-->
-      <!--<ion-card-content>-->
-         <!--<ion-item>-->
             <ion-label stacked>Days</ion-label>
-            <ion-select  multiple="true" okText="Ok" cancelText="Cancel">
-              <ion-option *ngFor="let day of days" value="{{day.id}}" selected="{{day.selected}}" >{{day.name}}</ion-option>
+            <ion-select multiple="true" [(ngModel)]="days">
+                <ion-option value="d1">Sunday</ion-option>
+                <ion-option value="d2">Monday</ion-option>
+                <ion-option value="d3">Thursday</ion-option>
+                <ion-option value="d4">Wednesday</ion-option>
+                <ion-option value="d5">Thursday</ion-option>
+                <ion-option value="d6">Friday</ion-option>
+                <ion-option value="d7">Saturday</ion-option>
             </ion-select>
-          <!--</ion-item>-->
-      <!--</ion-card-content>-->
     </ion-item>
     <ion-item *ngIf="!type">
-      <!--<ion-card-header>Interval</ion-card-header>-->
-      <!--<ion-card-content>-->
         <ion-label stacked>Interval</ion-label>
         <ion-badge color="primary" item-right>{{interval}}</ion-badge>
         <ion-range min="0" max="14" step="1" [(ngModel)]="interval" color="primary">
         </ion-range>
-      <!--</ion-card-content>-->
     </ion-item>
   </ion-list>
   <ion-list>

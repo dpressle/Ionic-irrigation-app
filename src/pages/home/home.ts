@@ -60,23 +60,6 @@ export class HomePage {
       this.checkState();
     }
   }
-  // loadConfig(){
-  //   // this.configService.getUrl().then(
-  //   //   (value) => {
-  //   //     console.log('got url', value);
-  //   //     this.url = <string>value;
-  //   //     if (this.url) {
-  //   //       this.getZones();  
-  //   //     } else {
-  //   //       this.editUrl();
-  //   //     }
-  //   //   }, 
-  //   //   (err) => {
-  //   //     console.log('Error', err)
-  //   //     // TODO: show messsage to user
-  //   //   }
-  //   // );
-  // }
 
   editUrl() {
     let configModal = this.modalCtrl.create(ConfigPage, {'webUrl': this.configService.url});
@@ -106,12 +89,12 @@ export class HomePage {
         // this.intervalId = setInterval(() => this.checkState(), 1000);
       },
       (error) => {
-        console.error(error);
-        let alert = this.alertCtrl.create({
-          title: 'Failed getting zones!',
-          subTitle: error,
-          buttons: ['OK']
-        });
+        // console.error(error);
+        // let alert = this.alertCtrl.create({
+        //   title: 'Failed getting zones!',
+        //   subTitle: error,
+        //   buttons: ['OK']
+        // });
         // alert.present();
         this.editUrl();
       },

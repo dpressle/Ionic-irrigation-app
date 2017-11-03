@@ -21,8 +21,8 @@ export class ScheduleDetailsPage {
   type: boolean;
   wadj: boolean;
   zones: any;
-  days: any[] = [];
-  // private url: string;
+  days: Array<string> = [];
+  // dayData: any;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -33,11 +33,7 @@ export class ScheduleDetailsPage {
               public alertCtrl: AlertController,
               // public events: Events,
               // public configService: ConfigService
-              ) {
-                // events.subscribe('config:save', () => {
-                //   this.url = this.configService.url;
-                // });
-              }
+              ) { }
 
   ionViewDidLoad() {
    // console.log(this.navParams.data);
@@ -65,14 +61,9 @@ export class ScheduleDetailsPage {
       this.scheduleDetails.type = false;
       this.scheduleDetails.wadj = false;
       this.scheduleDetails.interval = 0;
-      this.days = [
-        { id: 'd1', name: "Sunday",    selected: false },
-        { id: 'd2', name: "Monday",    selected: false },
-        { id: 'd3', name: "Thursday",  selected: false },
-        { id: 'd4', name: "Wednesday", selected: false },
-        { id: 'd5', name: "Thursday",  selected: false },
-        { id: 'd6', name: "Friday",    selected: false },
-        { id: 'd7', name: "Saturday",  selected: false }];
+      
+      this.days = [];
+      
       this.scheduleDetails.times = [
         { t: '00:00', e: false },
         { t: '00:00', e: false },
@@ -89,14 +80,15 @@ export class ScheduleDetailsPage {
           this.type = this.scheduleDetails.type === 'on' ? true : false;
           this.wadj = this.scheduleDetails.wadj === 'on' ? true : false;
           this.interval = this.scheduleDetails.interval;
-          this.days = [
-            { id: 'd1', name: "Sunday",    selected: (this.scheduleDetails.d1 === 'on') },
-            { id: 'd2', name: "Monday",    selected: (this.scheduleDetails.d2 === 'on') },
-            { id: 'd3', name: "Thursday",  selected: (this.scheduleDetails.d3 === 'on') },
-            { id: 'd4', name: "Wednesday", selected: (this.scheduleDetails.d4 === 'on') },
-            { id: 'd5', name: "Thursday",  selected: (this.scheduleDetails.d5 === 'on') },
-            { id: 'd6', name: "Friday",    selected: (this.scheduleDetails.d6 === 'on') },
-            { id: 'd7', name: "Saturday",  selected: (this.scheduleDetails.d7 === 'on') }];
+
+          if (this.scheduleDetails.d1 === 'on') this.days.push('d1');
+          if (this.scheduleDetails.d2 === 'on') this.days.push('d2');
+          if (this.scheduleDetails.d3 === 'on') this.days.push('d3');
+          if (this.scheduleDetails.d4 === 'on') this.days.push('d4');
+          if (this.scheduleDetails.d5 === 'on') this.days.push('d5');
+          if (this.scheduleDetails.d6 === 'on') this.days.push('d6');
+          if (this.scheduleDetails.d7 === 'on') this.days.push('d7');
+          
           this.scheduleDetails.times = [
             {t: this.scheduleDetails.times[0].t, e: this.scheduleDetails.times[0].e == 'on'},
             {t: this.scheduleDetails.times[1].t, e: this.scheduleDetails.times[1].e == 'on'},
@@ -151,11 +143,7 @@ export class ScheduleDetailsPage {
     saveString += 'interval=' + this.interval + '&';
     
     for (var i = 0; i < this.days.length; i++) {
-      let day = this.days[i];
-      //console.log(day);
-      if(day.selected){
-        saveString += day.id + '=on&';
-      }
+       saveString += this.days[i] + '=on&';
     }
 
     for (var i = 0; i < this.scheduleDetails.times.length; i++) {
